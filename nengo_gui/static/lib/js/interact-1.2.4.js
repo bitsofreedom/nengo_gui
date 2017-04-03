@@ -3354,6 +3354,7 @@
         this.shiftKey  = event.shiftKey;
         this.metaKey   = event.metaKey;
         this.button    = event.button;
+        this.buttons   = event.buttons;
         this.target    = element;
         this.t0        = interaction.downTimes[0];
         this.type      = action + (phase || '');
