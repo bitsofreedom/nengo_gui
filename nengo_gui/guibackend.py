@@ -27,11 +27,12 @@ logger = logging.getLogger(__name__)
 
 
 class Session(object):
-    __slots__ = ['creation_time', 'authenticated', 'login_host']
+    __slots__ = ['creation_time', 'authenticated', 'peer_name', 'login_host']
 
     def __init__(self):
         self.creation_time = time.time()
         self.authenticated = False
+        self.peer_name = None
         self.login_host = None
 
 
@@ -115,6 +116,12 @@ class GuiRequestHandler(server.HttpWsRequestHandler):
             content += b'<p>Please enter the password:</p>'
 
         if session.authenticated:
+            try:
+                session.peer_name = self.request.getpeername()[0]
+            except Exception:
+                logger.warning(
+                    "Cannot get peer name. Session will not be tied to "
+                    "client.", exc_info=True)
             return server.HttpRedirect('/')
 
         return server.HtmlResponse(content + b'''
@@ -268,8 +275,18 @@ class GuiRequestHandler(server.HttpWsRequestHandler):
 
     def get_session(self):
         try:
+            peer_name = self.request.getpeername()[0]
+        except Exception:
+            peer_name = None
+
+        try:
             session_id = self.cookie['_session_id'].value
             session = self.server.sessions[session_id]
+            if session.peer_name != peer_name:
+                logger.warning(
+                    "Session peer name mismatch: %s, %s", peer_name,
+                    session.peer_name)
+                raise KeyError()
         except KeyError:
             session_id, session = self.server.sessions.new_session(
                 self.request)
