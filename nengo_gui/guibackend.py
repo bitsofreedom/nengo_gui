@@ -156,7 +156,6 @@ class GuiRequestHandler(server.HttpWsRequestHandler):
             </p></form>
         ''')
 
-    @RequireAuthentication('/login')
     def serve_static(self):
         """Handles http://host:port/static/* by returning pkg data"""
         fn = os.path.join('static', self.resource)
