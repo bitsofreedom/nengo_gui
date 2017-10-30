@@ -62,7 +62,7 @@ class SessionManager(object):
     def _new_session_id(self, request):
         try:
             peer = request.getpeername()  # not supported on some systems
-        except:
+        except Exception:
             logger.warning(
                 "Cannot get peer name. Sessions will not be tied to client.",
                 exc_info=True)
