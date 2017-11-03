@@ -122,7 +122,7 @@ class GuiRequestHandler(server.HttpWsRequestHandler):
         if not self.resource.startswith(self.server.settings.prefix):
             raise server.InvalidResource(self.resource)
         self.resource = self.resource[len(self.server.settings.prefix):]
-        return super(GuiRequestHandler, self).http_GET()
+        server.HttpWsRequestHandler.http_GET(self)
 
     def login_page(self):
         session = self.get_session()
