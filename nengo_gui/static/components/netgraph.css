@@ -37,6 +37,10 @@ g.net rect{
     fill: #c00000;
 }
 
+.netgraph g.inhibitory > path.recur {
+    fill: none;
+}
+
 .netgraph g.modulatory > line {
     stroke: #8eb627;
     stroke-dasharray: 1em;
