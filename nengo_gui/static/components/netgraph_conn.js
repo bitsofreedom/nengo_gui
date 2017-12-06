@@ -89,6 +89,7 @@ Nengo.NetGraphConnection.prototype.create_line = function() {
         this.g.appendChild(this.recurrent_ellipse);
 
         this.marker = this.ng.createSVGElement('path');
+        this.marker.classList.add('marker');
         this.g.appendChild(this.marker);
 
         if (this.minimap == false) {
@@ -112,6 +113,7 @@ Nengo.NetGraphConnection.prototype.create_line = function() {
         this.line = this.ng.createSVGElement('line');
         this.g.appendChild(this.line);
         this.marker = this.ng.createSVGElement('path');
+        this.marker.classList.add('marker');
         if (this.minimap == false) {
             switch (this.kind) {
                 case "inhibitory":
