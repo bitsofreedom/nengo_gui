@@ -95,7 +95,7 @@ Nengo.NetGraphConnection.prototype.create_line = function() {
         if (this.minimap == false) {
             switch (this.kind) {
                 case "inhibitory":
-                    this.marker.setAttribute('d', "M 10,5.5 c 0,-5 5,-5 5,-5 V 10 c 0,0 -5,0 -5,-5 z");
+                    this.marker.setAttribute('d', "M 5,5.5 c 0,-5 5,-5 5,-5 V 10 c 0,0 -5,0 -5,-5 z");
                     break;
                 case "modulatory":
                     this.marker.setAttribute('d', "M 7.5,0 0,-5 -7.5,0 0,5 z");
