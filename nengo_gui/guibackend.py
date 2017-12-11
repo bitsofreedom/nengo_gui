@@ -143,8 +143,8 @@ class GuiRequestHandler(server.HttpWsRequestHandler):
     def serve_static(self):
         """Handles http://host:port/static/* by returning pkg data"""
         assert self.resource[0] == '/'
-        static_dir = os.path.normpath('/static/')
-        fn = os.path.normpath(self.resource)
+        static_dir = 'static' + os.sep
+        fn = os.path.normpath(self.resource[1:])
         if os.path.commonprefix((static_dir, fn)) != static_dir:
             raise server.Forbidden()
         mimetype, encoding = mimetypes.guess_type(fn)
